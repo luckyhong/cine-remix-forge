@@ -6,9 +6,10 @@ description: Given a film-commentary video URL, OR just a movie/show title with 
 # 电影深度解说词 + 原创动画短片生成器 (Cine Remix)
 
 The full workflow, copyright rules, and output requirements for this skill live in
-[`AGENTS.md`](../../../AGENTS.md) at the repo root — that's the tool-agnostic source of truth,
-shared with Cursor/Copilot/Codex/plain-chat usage of this same repo. Read it and follow it
-in full.
+[`AGENTS.md`](AGENTS.md) — that's the tool-agnostic source of truth, shared with
+Cursor/Copilot/Codex/plain-chat usage of the same repo (`AGENTS.md`, `scripts/`, and
+`references/` here are symlinks back to the repo root, not copies, so this folder stays in
+sync with the repo automatically). Read `AGENTS.md` and follow it in full.
 
-Paths referenced there (`scripts/fetch_content.py`, `references/*.md`) are relative to the
-repo root, not to this file's location.
+Paths referenced inside `AGENTS.md` (`scripts/fetch_content.py`, `references/*.md`) are
+relative to this same directory.
