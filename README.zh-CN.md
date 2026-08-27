@@ -5,7 +5,7 @@
 **有深度的电影解说词，全新的原创动画短片剧本——是重新创作，不是复制粘贴。**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-6b5b95)](https://claude.com/product/claude-code)
+[![AGENTS.md](https://img.shields.io/badge/AGENTS.md-%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%AB%8B-6b5b95)](AGENTS.md)
 [![Python 3](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
 [English](README.md)&nbsp;·&nbsp;简体中文
@@ -22,7 +22,19 @@
 2. **原创动画短片剧本** —— 每次生成都是全新的寓言世界，主题上呼应原电影，但人物、设定、情节完全原创，不是换个媒介的翻拍。
 3. **创作手法对照表** —— 把两份成稿里用到的手法（钩子、论点、对照角色、首尾呼应）拆开对应列出，让这套方法论本身可以被复用，而不只是拿到两篇成品。
 
-它是一个 [Claude Code](https://claude.com/product/claude-code) **skill**——一份自包含的工作流定义，配合脚本和参考文档，Claude 在被调用时会照着执行。
+整套工作流只在 [`AGENTS.md`](AGENTS.md) 里定义了一份，**不绑定任何一个具体的 AI 工具**。只要一个 agent 能读 markdown 文件、能跑 Python 脚本，就能执行这套流程。
+
+## 支持哪些工具
+
+| 工具 | 怎么接入 |
+|---|---|
+| **Claude Code** | 安装为 skill（放到 `~/.claude/skills/cine-remix/`，或者直接把仓库克隆下来打开）——`.claude/skills/cine-remix/SKILL.md` 会自动触发，内容指向 `AGENTS.md`。根目录的 `CLAUDE.md` 覆盖"没装成 skill、直接打开仓库"这种情况。 |
+| **Codex CLI** 及其他支持 [agents.md](https://agents.md) 约定的工具 | 原生读取根目录的 `AGENTS.md`，不需要额外适配。 |
+| **Cursor** | `.cursor/rules/cine-remix.mdc` 在匹配的请求上触发，内容指向 `AGENTS.md`。 |
+| **GitHub Copilot** | `.github/copilot-instructions.md` 指向 `AGENTS.md`。 |
+| **DeepSeek、GLM 等纯对话模型** | 这些是模型，不是有自己项目文件约定的工具——没有"安装"这一步。直接把 `AGENTS.md`（以及需要用到的 `references/*.md`）内容粘贴进对话即可；如果你是通过 Cline / Continue / opencode 这类已经支持 `AGENTS.md` 规则的通用 agent 工具去接入这些模型，那自动就能读到。 |
+
+`AGENTS.md` 和 `references/` 里的内容都不依赖任何具体工具。上面这些针对各工具的文件，作用只是让每个工具"找到并遵循"这份workflow——真正的流程、版权规则、格式要求只在一个地方维护，不会在不同工具之间跑偏。
 
 ## 为什么做这个
 
@@ -30,7 +42,7 @@
 
 ## 快速开始
 
-在启用了这个 skill 的 Claude Code 会话里，直接说：
+在上面任意一个工具里，指向这个仓库之后，直接说：
 
 ```text
 帮我写一份《XXX》的深度解说词，再配一个原创动画短片剧本。
@@ -41,11 +53,11 @@ https://youtube.com/watch?v=xxxx 这是一个电影解说视频，帮我写一�
 再做一个动画短片改编。
 ```
 
-skill 会自动判断输入模式：
+工作流会自动判断输入模式：
 
 | 输入 | 会发生什么 |
 |---|---|
-| **只给电影名** | Claude 直接研究这部电影（自身知识 + 必要时用网络搜索核实事实），不会去抓取任何视频 |
+| **只给电影名** | 模型直接研究这部电影（自身知识 + 必要时用网络搜索核实事实），不会去抓取任何视频 |
 | **给了视频链接** | `scripts/fetch_content.py` 先抓取参考视频的元数据/转写文案/评论，但只是为了提炼"它用了什么手法"，不会沿用具体措辞 |
 
 两条路径最终都汇入同一套产出流程：论点先行的结构设计 → 完整解说词 → 全新寓言构思（会先查是否和之前用过的重复）→ 完整动画剧本 → 创作手法对照表。
@@ -53,18 +65,21 @@ skill 会自动判断输入模式：
 ## 项目结构
 
 ```
-.claude/skills/cine-remix/
-├── SKILL.md                          # 工作流程、版权红线、产出硬性要求
-├── scripts/
-│   └── fetch_content.py              # 参考视频抓取（yt-dlp + 本地语音转写兜底）
-├── references/
-│   ├── script_format_guide.md        # 分幕格式、钩子设计模式、收尾方式
-│   ├── animation_fable_guide.md      # 寓言设计方法论：载体意象、循环结构、
-│   │                                   对照角色、语气拿捏
-│   ├── used_concepts_log.md          # 已用过的动画核心意象记录（只追加不覆盖）
-│   └── output_template.md            # 最终文档拼装模板
-└── examples/
-    └── ...                           # 一次真实产出，作为质量基准留档
+AGENTS.md                             # 唯一权威来源：工作流、版权规则、产出格式要求
+CLAUDE.md                             # 指向 AGENTS.md，覆盖"Claude Code 直接打开本仓库"的情况
+scripts/
+└── fetch_content.py                  # 参考视频抓取（yt-dlp + 本地语音转写兜底）
+references/
+├── script_format_guide.md            # 分幕格式、钩子设计模式、收尾方式
+├── animation_fable_guide.md          # 寓言设计方法论：载体意象、循环结构、
+│                                        对照角色、语气拿捏
+├── used_concepts_log.md              # 已用过的动画核心意象记录（只追加不覆盖）
+└── output_template.md                # 最终文档拼装模板
+examples/
+└── ...                                # 一次真实产出，作为质量基准留档
+.claude/skills/cine-remix/SKILL.md    # Claude Code 适配入口 → 指向 AGENTS.md
+.cursor/rules/cine-remix.mdc          # Cursor 适配入口 → 指向 AGENTS.md
+.github/copilot-instructions.md       # Copilot 适配入口 → 指向 AGENTS.md
 ```
 
 ## 版权原则
@@ -76,7 +91,7 @@ skill 会自动判断输入模式：
 - 动画短片是100%虚构的：新世界观、新角色、新情节。判断标准很简单——没看过原电影的人，不应该单看剧本就认出这是哪部电影。
 - 真实的传记/历史事实可以自由引用（事实本身不受版权保护），但前提是模型有把握它是准确的——拿不准的细节要么留有余地，要么直接不用，绝不编造。
 
-完整规则见 [`SKILL.md`](.claude/skills/cine-remix/SKILL.md)。
+完整规则见 [`AGENTS.md`](AGENTS.md)。
 
 ## 依赖
 

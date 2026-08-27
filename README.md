@@ -5,7 +5,7 @@
 **Deep film commentary scripts. Original animated short screenplays. Generated, not copied.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-6b5b95)](https://claude.com/product/claude-code)
+[![AGENTS.md](https://img.shields.io/badge/AGENTS.md-tool--agnostic-6b5b95)](AGENTS.md)
 [![Python 3](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
 English&nbsp;·&nbsp;[简体中文](README.zh-CN.md)
@@ -22,7 +22,19 @@ Give it a film-commentary video URL, or just the name of a movie — nothing els
 2. **An original animated short screenplay** — a brand-new fable world every run, thematically inspired by the film but with its own characters, setting, and plot. Never a reskin of the source material.
 3. **A technique cross-reference table** — maps the devices used in both pieces (hook, thesis, foil character, callback) so the underlying method is reusable, not just the output.
 
-It ships as a [Claude Code](https://claude.com/product/claude-code) **skill** — a self-contained workflow definition plus supporting scripts and reference guides that Claude follows when invoked.
+The workflow itself is defined once, in [`AGENTS.md`](AGENTS.md), and is **not tied to any single AI tool**. Whatever agent you point at this repository — as long as it can read a markdown file and run a Python script — can execute it.
+
+## Works With
+
+| Tool | How it picks this up |
+|---|---|
+| **Claude Code** | Install as a skill (`~/.claude/skills/cine-remix/`, or clone the repo and open it directly) — `.claude/skills/cine-remix/SKILL.md` triggers automatically and defers to `AGENTS.md`. `CLAUDE.md` at the repo root covers the "opened the repo without installing it as a skill" case. |
+| **Codex CLI** and other [agents.md](https://agents.md)-aware tools | Reads `AGENTS.md` at the repo root natively — no adapter needed. |
+| **Cursor** | `.cursor/rules/cine-remix.mdc` triggers on matching requests and defers to `AGENTS.md`. |
+| **GitHub Copilot** | `.github/copilot-instructions.md` points it at `AGENTS.md`. |
+| **DeepSeek, GLM, or any bare chat model** | These are models, not tools with their own project-file convention — there's nothing to "install." Paste the contents of `AGENTS.md` (and the relevant `references/*.md` files) directly into the chat, or point a harness like Cline/Continue/opencode that already reads `AGENTS.md`-style rules at one of these models as the backend. |
+
+Nothing in `AGENTS.md` or `references/` assumes a specific tool. The per-tool files above exist purely to get each tool to *find and follow* it — the actual workflow, copyright rules, and format requirements live in exactly one place, so they can't drift out of sync between tools.
 
 ## Why this exists
 
@@ -30,7 +42,7 @@ Most "video teardown" tools stop at reproducing the source almost verbatim with 
 
 ## Quick Start
 
-Inside a Claude Code session with this skill enabled:
+In any of the tools above, once it's pointed at this repo:
 
 ```text
 Write a deep commentary script for <film title>, plus an original animated short inspired by it.
@@ -41,11 +53,11 @@ https://youtube.com/watch?v=xxxx — this is a film commentary video. Write a de
 more original take, plus an animated short adaptation.
 ```
 
-The skill detects which input mode you're in automatically:
+The workflow detects which input mode you're in automatically:
 
 | Input | What happens |
 |---|---|
-| **Movie title only** | Claude researches the film directly (own knowledge + web search for fact-checking) — no video is fetched. |
+| **Movie title only** | The model researches the film directly (own knowledge + web search for fact-checking) — no video is fetched. |
 | **Video URL** | `scripts/fetch_content.py` pulls the reference video's metadata/transcript/comments first, purely to extract *which techniques it uses* — not to reuse its wording. |
 
 Both paths converge on the same output pipeline: thesis-first script design → full commentary script → a fresh fable concept (checked against previously used ones) → full animated screenplay → cross-reference table.
@@ -53,18 +65,21 @@ Both paths converge on the same output pipeline: thesis-first script design → 
 ## Project Structure
 
 ```
-.claude/skills/cine-remix/
-├── SKILL.md                          # Workflow, copyright rules, output requirements
-├── scripts/
-│   └── fetch_content.py              # Reference-video fetch (yt-dlp + local ASR fallback)
-├── references/
-│   ├── script_format_guide.md        # Act structure, hook patterns, closing devices
-│   ├── animation_fable_guide.md      # Fable design method: carrier imagery, cyclic
-│   │                                   structure, foil characters, tone balance
-│   ├── used_concepts_log.md          # Append-only log of fable premises already used
-│   └── output_template.md            # Final document assembly template
-└── examples/
-    └── ...                           # A real generated run, kept as a quality baseline
+AGENTS.md                             # Source of truth: workflow, copyright rules, output specs
+CLAUDE.md                             # Pointer to AGENTS.md, for Claude Code opened directly on this repo
+scripts/
+└── fetch_content.py                  # Reference-video fetch (yt-dlp + local ASR fallback)
+references/
+├── script_format_guide.md            # Act structure, hook patterns, closing devices
+├── animation_fable_guide.md          # Fable design method: carrier imagery, cyclic
+│                                        structure, foil characters, tone balance
+├── used_concepts_log.md              # Append-only log of fable premises already used
+└── output_template.md                # Final document assembly template
+examples/
+└── ...                                # A real generated run, kept as a quality baseline
+.claude/skills/cine-remix/SKILL.md    # Claude Code adapter → defers to AGENTS.md
+.cursor/rules/cine-remix.mdc          # Cursor adapter → defers to AGENTS.md
+.github/copilot-instructions.md       # Copilot adapter → defers to AGENTS.md
 ```
 
 ## Copyright Principles
@@ -76,7 +91,7 @@ Every output here is **original commentary and original adaptation** — never a
 - Animated shorts are 100% fictional: new world, new characters, new plot. The test is simple — someone who hasn't seen the source film shouldn't be able to identify it from the screenplay alone.
 - Real biographical/historical facts may be cited freely (they aren't copyrightable), but only when the model is confident they're accurate — uncertain details are hedged or omitted, never invented.
 
-Full rules live in [`SKILL.md`](.claude/skills/cine-remix/SKILL.md).
+Full rules live in [`AGENTS.md`](AGENTS.md).
 
 ## Requirements
 

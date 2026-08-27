@@ -1,0 +1,11 @@
+---
+description: Deep film commentary script + original animated short generator (cine-remix). Trigger when the user gives a movie/show title or a film-commentary video link and asks for a commentary script, "解说词", or an animated/short-film adaptation.
+alwaysApply: false
+---
+
+The full workflow, copyright rules, and output requirements live in
+[AGENTS.md](../../AGENTS.md) at the repo root. Read it and follow it in full before doing
+anything else for this kind of request.
+
+Paths referenced there (`scripts/fetch_content.py`, `references/*.md`) are relative to the
+repo root.
