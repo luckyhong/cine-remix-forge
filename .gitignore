@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# scratch/output files generated while running the skill
+/output/
+*.tmp.json
