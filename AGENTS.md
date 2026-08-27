@@ -143,6 +143,27 @@ first, then the animated screenplay, then a "technique cross-reference table" sh
 device each piece used and how they echo each other. That table is a third deliverable in its
 own right — it's what makes the underlying method reusable, not just the two finished pieces.
 
+### Step 7 — Save it as a markdown file (don't stop at printing it in chat)
+
+The deliverable is a document, not a chat message — **write it to an actual `.md` file** if
+your environment has any file-writing capability at all (Claude Code, Cursor, Codex CLI, and
+similar all do). Only skip this step if you are genuinely a bare chat model with no file
+access (e.g. pasted straight into a DeepSeek/GLM conversation with no tools) — in that case,
+print the full markdown in the response instead and say so.
+
+Where to save it:
+- If the current working directory has a `works/` folder (or something clearly playing that
+  role — a directory whose purpose is to hold generated documents from this workflow), save
+  there.
+- Otherwise, save it directly in the current working directory.
+
+Filename: `<film title>_深度解说词与动画短片.md` (romanize or translate the title if it's not
+already convenient as a filename — see `examples/` for the naming pattern this repo itself
+uses). Don't overwrite an existing file for the same film without asking; if one already
+exists, either version it (`_v2`) or confirm with the user first.
+
+After saving, tell the user the file path — don't just say "done," name where it landed.
+
 ## Edge cases
 
 - **Can't fetch the film/video info**: report the actual error; don't fill in missing details
