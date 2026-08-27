@@ -1,57 +1,91 @@
-# Cine Remix Forge
+<div align="center">
 
-给一个电影解说视频链接，或者直接给一个电影/剧集的名字，产出一份完整的深度创作文档：
+# 🎬 Cine Remix Forge
 
-1. **深度电影解说词**——8-16分钟、分幕+时间轴格式、有开篇钩子、有真实历史锚点、有跨作品对照、有自己的论点，不是剧情复述
-2. **原创动画短片剧本**——主题上呼应这部电影，但世界观、人物、情节完全原创的寓言故事，每次生成都会换一个新的核心意象，不会重复
-3. **创作手法对照表**——把两份成稿里用到的手法拆开列出来，方便自己复用这套方法论
+**Deep film commentary scripts. Original animated short screenplays. Generated, not copied.**
 
-这是一个 [Claude Code](https://claude.com/product/claude-code) skill 项目，核心逻辑都在 `.claude/skills/cine-remix/` 下。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-6b5b95)](https://claude.com/product/claude-code)
+[![Python 3](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
-## 怎么用
+English&nbsp;·&nbsp;[简体中文](README.zh-CN.md)
 
-在装有 Claude Code、且已启用这个 skill 的环境里，直接给一个电影名字或者一条解说视频链接：
+</div>
 
+---
+
+## Overview
+
+Give it a film-commentary video URL, or just the name of a movie — nothing else required — and **Cine Remix Forge** produces a complete creative package:
+
+1. **A deep-dive commentary script** — 8–16 minutes, act-structured with timecodes, a cold-open hook, verifiable historical/critical context, and at least one cross-work comparison. Not a plot recap with commentary bolted on.
+2. **An original animated short screenplay** — a brand-new fable world every run, thematically inspired by the film but with its own characters, setting, and plot. Never a reskin of the source material.
+3. **A technique cross-reference table** — maps the devices used in both pieces (hook, thesis, foil character, callback) so the underlying method is reusable, not just the output.
+
+It ships as a [Claude Code](https://claude.com/product/claude-code) **skill** — a self-contained workflow definition plus supporting scripts and reference guides that Claude follows when invoked.
+
+## Why this exists
+
+Most "video teardown" tools stop at reproducing the source almost verbatim with the serial numbers filed off. This project takes the opposite bet: real value comes from extracting *why something works* and building something new on top of that understanding — not from repackaging what already exists. Every constraint in this repo (see [Copyright Principles](#copyright-principles)) exists to enforce that bet.
+
+## Quick Start
+
+Inside a Claude Code session with this skill enabled:
+
+```text
+Write a deep commentary script for <film title>, plus an original animated short inspired by it.
 ```
-帮我写一份《XXX》的深度解说词，再配一个原创动画短片剧本
+
+```text
+https://youtube.com/watch?v=xxxx — this is a film commentary video. Write a deeper,
+more original take, plus an animated short adaptation.
 ```
 
-```
-https://youtube.com/xxx 这个解说视频，帮我写一份更有深度的版本，再做个动画短片
-```
+The skill detects which input mode you're in automatically:
 
-skill 会自动判断输入类型（有链接就先抓取参考视频做轻量拆解，没链接就直接研究这部电影本身），然后按固定格式产出完整文档。
+| Input | What happens |
+|---|---|
+| **Movie title only** | Claude researches the film directly (own knowledge + web search for fact-checking) — no video is fetched. |
+| **Video URL** | `scripts/fetch_content.py` pulls the reference video's metadata/transcript/comments first, purely to extract *which techniques it uses* — not to reuse its wording. |
 
-## 目录结构
+Both paths converge on the same output pipeline: thesis-first script design → full commentary script → a fresh fable concept (checked against previously used ones) → full animated screenplay → cross-reference table.
+
+## Project Structure
 
 ```
 .claude/skills/cine-remix/
-├── SKILL.md                          # 核心工作流程和版权红线
+├── SKILL.md                          # Workflow, copyright rules, output requirements
 ├── scripts/
-│   └── fetch_content.py              # 抓取参考解说视频的元数据/文案/评论（yt-dlp + 本地语音转写兜底）
+│   └── fetch_content.py              # Reference-video fetch (yt-dlp + local ASR fallback)
 ├── references/
-│   ├── script_format_guide.md        # 解说词格式规范 + 钩子设计方法论
-│   ├── animation_fable_guide.md      # 原创动画寓言设计方法论
-│   ├── used_concepts_log.md          # 已用过的动画载体意象记录，避免重复
-│   └── output_template.md            # 最终文档拼装模板
+│   ├── script_format_guide.md        # Act structure, hook patterns, closing devices
+│   ├── animation_fable_guide.md      # Fable design method: carrier imagery, cyclic
+│   │                                   structure, foil characters, tone balance
+│   ├── used_concepts_log.md          # Append-only log of fable premises already used
+│   └── output_template.md            # Final document assembly template
 └── examples/
-    └── 我这一辈子_深度解说词与动画短片.md   # 一次真实产出，用作质量/格式校准参照
+    └── ...                           # A real generated run, kept as a quality baseline
 ```
 
-## 版权原则
+## Copyright Principles
 
-这个 skill 的所有产出都必须是**原创评论 + 原创改编**，不是复制粘贴：
+Every output here is **original commentary and original adaptation** — never a copy with the names changed:
 
-- 解说词可以自由讨论剧情和历史背景，但不大段逐字引用电影台词或原著文字
-- 如果参考了别人的解说视频，只提炼"这类内容为什么有效"的方法论，不沿用具体论证和措辞
-- 动画短片是完全虚构的新故事，只在主题上呼应原电影，人物、情节、世界观都是原创的
+- Commentary scripts may freely discuss plot, characters, and history (standard film-criticism practice), but do not quote film dialogue or source-novel text at length — short, clearly-attributed quotes only.
+- When a reference video is fetched, only its *technique* (hook style, pacing, argument shape) is extracted — its specific wording, jokes, and arguments are not reused.
+- Animated shorts are 100% fictional: new world, new characters, new plot. The test is simple — someone who hasn't seen the source film shouldn't be able to identify it from the screenplay alone.
+- Real biographical/historical facts may be cited freely (they aren't copyrightable), but only when the model is confident they're accurate — uncertain details are hedged or omitted, never invented.
 
-具体规则见 [`.claude/skills/cine-remix/SKILL.md`](.claude/skills/cine-remix/SKILL.md) 里的"版权红线"章节。
+Full rules live in [`SKILL.md`](.claude/skills/cine-remix/SKILL.md).
 
-## 依赖
+## Requirements
 
-`fetch_content.py` 依赖 [`yt-dlp`](https://github.com/yt-dlp/yt-dlp)，缺失时会自动尝试安装（优先 `brew`，其次 `pipx`，最后 `pip --user`）。只有在给了参考视频链接、且平台字幕/简介都拿不到有效文案时，才会触发本地语音转写兜底（[`faster-whisper`](https://github.com/SYSTRAN/faster-whisper)，同样按需自动安装），纯靠电影名字生成时不需要这套依赖。
+`fetch_content.py` depends on [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) and installs it on first use if missing (tries `brew`, then `pipx`, then `pip --user` in that order). Local ASR via [`faster-whisper`](https://github.com/SYSTRAN/faster-whisper) only kicks in as a last resort, when a reference video has neither usable captions nor a substantive description — and only in URL mode. Movie-title mode needs no extra dependencies at all.
 
-## 项目状态
+## Status
 
-从 [ideas-exploration](https://github.com/) 项目里孵化出来的独立项目，核心方法论已经过几轮真实案例验证。
+Extracted into its own repository after the underlying method was validated across several real film examples in a working session — see `examples/` for a full sample run.
+
+## License
+
+[MIT](LICENSE)
