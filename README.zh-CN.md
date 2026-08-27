@@ -28,7 +28,7 @@
 
 | 工具 | 怎么接入 |
 |---|---|
-| **Claude Code** | 安装为 skill（放到 `~/.claude/skills/cine-remix/`，或者直接把仓库克隆下来打开）——`.claude/skills/cine-remix/SKILL.md` 会自动触发，内容指向 `AGENTS.md`。根目录的 `CLAUDE.md` 覆盖"没装成 skill、直接打开仓库"这种情况。 |
+| **Claude Code** | 安装为 skill（放到 `~/.claude/skills/cine-remix/`，或者直接把仓库克隆下来打开）——`.claude/skills/cine-remix/SKILL.md` 会自动触发，内容指向 `AGENTS.md`。根目录的 `CLAUDE.md` 覆盖"没装成 skill、直接打开仓库"这种情况。也可以不依赖自动触发，直接用 `/cine-remix <请求>` 显式调用。 |
 | **Codex CLI** 及其他支持 [agents.md](https://agents.md) 约定的工具 | 原生读取根目录的 `AGENTS.md`，不需要额外适配。 |
 | **Cursor** | `.cursor/rules/cine-remix.mdc` 在匹配的请求上触发，内容指向 `AGENTS.md`。 |
 | **GitHub Copilot** | `.github/copilot-instructions.md` 指向 `AGENTS.md`。 |
@@ -52,6 +52,14 @@
 https://youtube.com/watch?v=xxxx 这是一个电影解说视频，帮我写一份更有深度、更原创的版本，
 再做一个动画短片改编。
 ```
+
+在 Claude Code 里，也可以不依赖自动触发，直接指名调用：
+
+```text
+/cine-remix 帮我写一份《XXX》的深度解说词，再配一个原创动画短片剧本。
+```
+
+（`/skill名称` 这个语法是 Claude Code 特有的——上面列的其他工具都是靠描述匹配自动触发，没有统一的手动调用前缀。）
 
 工作流会自动判断输入模式：
 

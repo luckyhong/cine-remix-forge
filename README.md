@@ -28,7 +28,7 @@ The workflow itself is defined once, in [`AGENTS.md`](AGENTS.md), and is **not t
 
 | Tool | How it picks this up |
 |---|---|
-| **Claude Code** | Install as a skill (`~/.claude/skills/cine-remix/`, or clone the repo and open it directly) — `.claude/skills/cine-remix/SKILL.md` triggers automatically and defers to `AGENTS.md`. `CLAUDE.md` at the repo root covers the "opened the repo without installing it as a skill" case. |
+| **Claude Code** | Install as a skill (`~/.claude/skills/cine-remix/`, or clone the repo and open it directly) — `.claude/skills/cine-remix/SKILL.md` triggers automatically and defers to `AGENTS.md`. `CLAUDE.md` at the repo root covers the "opened the repo without installing it as a skill" case. Can also be invoked explicitly with `/cine-remix <request>` instead of relying on auto-triggering. |
 | **Codex CLI** and other [agents.md](https://agents.md)-aware tools | Reads `AGENTS.md` at the repo root natively — no adapter needed. |
 | **Cursor** | `.cursor/rules/cine-remix.mdc` triggers on matching requests and defers to `AGENTS.md`. |
 | **GitHub Copilot** | `.github/copilot-instructions.md` points it at `AGENTS.md`. |
@@ -52,6 +52,14 @@ Write a deep commentary script for <film title>, plus an original animated short
 https://youtube.com/watch?v=xxxx — this is a film commentary video. Write a deeper,
 more original take, plus an animated short adaptation.
 ```
+
+In Claude Code specifically, you can also invoke it explicitly by name instead of relying on auto-triggering:
+
+```text
+/cine-remix Write a deep commentary script for <film title>, plus an original animated short.
+```
+
+(This `/skill-name` syntax is specific to Claude Code — the other tools listed above rely on description-based auto-triggering, not a manual invocation prefix.)
 
 The workflow detects which input mode you're in automatically:
 
