@@ -164,6 +164,29 @@ exists, either version it (`_v2`) or confirm with the user first.
 
 After saving, tell the user the file path — don't just say "done," name where it landed.
 
+## Optional Step 8 — Render the animated short as video
+
+This step is **opt-in only**. Never trigger it off the same requests that trigger Steps 1–7 —
+"写一份深度解说词" must never silently kick off image/video generation. It only activates on an
+explicit, separate ask ("把这个动画短片做成视频" / "render this as a video" / "帮我配上手绘风格视频"
+/ "生成即梦/Seedance 的提示词"), because unlike Steps 1–7 (pure text), this is slow and/or has
+real generation cost.
+
+Full mechanics live in [`references/video_render_routes.md`](references/video_render_routes.md).
+The top-level decision tree:
+
+1. Confirm the user actually wants this before doing anything.
+2. Ask which route: **Route 1** (`scripts/screenplay_to_prose.py` → hand-drawn silent video via
+   the `story-to-handdrawn-video` skill, ready today) or **Route 2**
+   (`scripts/screenplay_to_video_prompts.py` → paste-ready prompts for Jimeng/Seedance or similar,
+   ready today; live automation not available yet).
+3. For Route 1: **always ask which scope** (`teaser`/`highlight`/`full`) — run the script with
+   `--scope preview` first to show the actual scene selection and beat/duration estimate for this
+   specific screenplay, then re-run with the confirmed scope. Never assume a default.
+4. State plainly what they'll get before generating anything: Route 1 output is silent (no
+   dialogue audio, no voice, no music — dialogue becomes paraphrased on-screen captions) and
+   vertical 3:4; Route 2 output is a prompt list to paste elsewhere, not a rendered video.
+
 ## Edge cases
 
 - **Can't fetch the film/video info**: report the actual error; don't fill in missing details
@@ -178,3 +201,7 @@ After saving, tell the user the file path — don't just say "done," name where 
   fable can be sharp, but shouldn't name-check real political entities or living figures.
 - **User only wants one of the two pieces**: skip the other one rather than padding it out to
   force a matched pair.
+- **Video rendering (Step 8)**: the conversion scripts only ever read the animated-short section
+  of the assembled document, never the commentary section — this is what keeps the real film's
+  title/director/history out of image/video-generation prompts. Don't work around that boundary
+  by hand-copying commentary-section content into a render prompt.
