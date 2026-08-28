@@ -72,6 +72,20 @@ The workflow detects which input mode you're in automatically:
 
 Both paths converge on the same output pipeline: thesis-first script design → full commentary script → a fresh fable concept (checked against previously used ones) → full animated screenplay → cross-reference table.
 
+## Narration Persona
+
+The commentary script isn't locked to one tone. Before writing the hook, the workflow picks a **narration persona** — each one rewrites the opening hook, the act-transition sentences, and the closing sign-off differently. The thesis-layering method, act structure, and copyright rules stay identical across every persona — only the voice changes. Full wording rules for each: [`references/narration_style_library.md`](references/narration_style_library.md).
+
+| # | Persona | Voice |
+|---|---|---|
+| 1 | **严肃反转型** (default) | Weighty thesis-reversal — bolded judgment lines, restrained direct address |
+| 2 | 学术严谨型 | Calm, evidence-first — reads like a serious film review |
+| 3 | 犀利吐槽型 | Sharp and snarky — but a joke never lands on the emotional climax |
+| 4 | 温情人文型 | Warm, close to the characters — closes like a letter |
+| 5 | 悬疑节奏型 | Short clauses, withheld information — every act ends on a cliffhanger |
+
+If your request already signals a tone ("make it snarkier," "more suspenseful"), the matching persona is used automatically — no need to ask. Otherwise you're asked once, using the same numbered-options-plus-default pattern as the [save-location question](#output) below; an unanswered or non-interactive run defaults to persona 1, so nothing changes unless you opt in.
+
 ## Output
 
 The assembled document is always saved as a real `.md` file — never left sitting only in the chat transcript. Once it's ready, you're asked where to put it:
@@ -146,7 +160,7 @@ Extracted into its own repository after the underlying method was validated acro
 
 ## Roadmap
 
-Future ideas (narration style presets, real-timestamp editing alignment, multi-language output, a multi-agent fact-checking pass, and more) are tracked in [`ROADMAP.md`](ROADMAP.md) — a running backlog, not a commitment.
+Future ideas (selection-angle differentiation checks, real-timestamp editing alignment, multi-language output, a multi-agent fact-checking pass, and more) are tracked in [`ROADMAP.md`](ROADMAP.md) — a running backlog, not a commitment.
 
 ## License
 
