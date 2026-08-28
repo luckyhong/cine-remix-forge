@@ -143,6 +143,10 @@ Full rules live in [`AGENTS.md`](AGENTS.md).
 
 Extracted into its own repository after the underlying method was validated across several real film examples in a working session — see `examples/` for a full sample run.
 
+## Roadmap
+
+Future ideas (narration style presets, real-timestamp editing alignment, multi-language output, a multi-agent fact-checking pass, and more) are tracked in [`ROADMAP.md`](ROADMAP.md) — a running backlog, not a commitment.
+
 ## License
 
 [MIT](LICENSE)
