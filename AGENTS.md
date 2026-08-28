@@ -151,17 +151,22 @@ similar all do). Only skip this step if you are genuinely a bare chat model with
 access (e.g. pasted straight into a DeepSeek/GLM conversation with no tools) — in that case,
 print the full markdown in the response instead and say so.
 
-**Where to save it is the user's choice, not something to decide silently.** Once the document
+**Where to save it is the user's choice, not something to decide silently.** Once the content
 is assembled, ask — this is a plain-text question, so it works the same in Claude Code, Cursor,
-Codex CLI, or a bare chat interface:
+Codex CLI, or a bare chat interface. Name what was actually written (not the generic word
+"文档") and the film title, so the question reads like it's about the actual deliverable:
 
 ```
-文档写好了，存到哪？
+《<film title>》的深度解说词和动画短片剧本都写好了，存到哪？
 A) 当前目录（<resolved cwd>）
 B) 当前目录下的 works/（<resolved cwd>/works，如果不存在会新建）
 C) 你自己指定一个路径
 不回复的话默认用 <A, or B if a works/-like folder already exists in cwd>。
 ```
+
+If only one of the two pieces was actually generated (per the "user only wants one" edge case
+below), name that one specifically instead — e.g. "《<film title>》的深度解说词写好了，存到哪？"
+— don't claim both exist when only one does.
 
 Fill in the actual resolved paths, don't leave the placeholders literal. If a `works/` folder
 (or something clearly playing that role) already exists in the current working directory, make

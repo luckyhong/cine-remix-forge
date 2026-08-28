@@ -77,7 +77,7 @@ Both paths converge on the same output pipeline: thesis-first script design → 
 The assembled document is always saved as a real `.md` file — never left sitting only in the chat transcript. Once it's ready, you're asked where to put it:
 
 ```text
-文档写好了，存到哪？
+《XXX》的深度解说词和动画短片剧本都写好了，存到哪？
 A) 当前目录（...）
 B) 当前目录下的 works/（...，如果不存在会新建）
 C) 你自己指定一个路径
