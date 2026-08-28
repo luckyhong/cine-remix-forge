@@ -151,11 +151,24 @@ similar all do). Only skip this step if you are genuinely a bare chat model with
 access (e.g. pasted straight into a DeepSeek/GLM conversation with no tools) — in that case,
 print the full markdown in the response instead and say so.
 
-Where to save it:
-- If the current working directory has a `works/` folder (or something clearly playing that
-  role — a directory whose purpose is to hold generated documents from this workflow), save
-  there.
-- Otherwise, save it directly in the current working directory.
+**Where to save it is the user's choice, not something to decide silently.** Once the document
+is assembled, ask — this is a plain-text question, so it works the same in Claude Code, Cursor,
+Codex CLI, or a bare chat interface:
+
+```
+文档写好了，存到哪？
+A) 当前目录（<resolved cwd>）
+B) 当前目录下的 works/（<resolved cwd>/works，如果不存在会新建）
+C) 你自己指定一个路径
+不回复的话默认用 <A, or B if a works/-like folder already exists in cwd>。
+```
+
+Fill in the actual resolved paths, don't leave the placeholders literal. If a `works/` folder
+(or something clearly playing that role) already exists in the current working directory, make
+B the stated default in the last line; otherwise A is the default. This default only matters
+for non-interactive/unattended runs where nobody will answer — **it must never block the
+document from being written at all**, since Step 7's whole point is guaranteeing a real file
+gets produced every time. In an interactive session, wait for the actual answer before writing.
 
 Filename: `<film title>_深度解说词与动画短片.md` (romanize or translate the title if it's not
 already convenient as a filename — see `examples/` for the naming pattern this repo itself
