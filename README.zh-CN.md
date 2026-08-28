@@ -22,6 +22,8 @@
 2. **原创动画短片剧本** —— 每次生成都是全新的寓言世界，主题上呼应原电影，但人物、设定、情节完全原创，不是换个媒介的翻拍。
 3. **创作手法对照表** —— 把两份成稿里用到的手法（钩子、论点、对照角色、首尾呼应）拆开对应列出，让这套方法论本身可以被复用，而不只是拿到两篇成品。
 
+文档一定会存成真正的 `.md` 文件——存哪会问你（见[产出与存放位置](#产出与存放位置)）；动画短片还可以再往前一步，做成真正的视频（见[可选功能：把动画短片渲染成视频](#可选功能把动画短片渲染成视频)）。
+
 整套工作流只在 [`AGENTS.md`](AGENTS.md) 里定义了一份，**不绑定任何一个具体的 AI 工具**。只要一个 agent 能读 markdown 文件、能跑 Python 脚本，就能执行这套流程。
 
 ## 支持哪些工具
@@ -70,19 +72,48 @@ https://youtube.com/watch?v=xxxx 这是一个电影解说视频，帮我写一�
 
 两条路径最终都汇入同一套产出流程：论点先行的结构设计 → 完整解说词 → 全新寓言构思（会先查是否和之前用过的重复）→ 完整动画剧本 → 创作手法对照表。
 
+## 产出与存放位置
+
+组装好的文档一定会存成真正的 `.md` 文件——绝不会只留在聊天记录里。写好之后会问你存哪：
+
+```text
+文档写好了，存到哪？
+A) 当前目录（...）
+B) 当前目录下的 works/（...，如果不存在会新建）
+C) 你自己指定一个路径
+```
+
+如果没人回答（比如非交互式/无人值守的运行场景），会回退到一个合理的默认值——当前目录下如果有 `works/` 这类文件夹就用它，没有就用当前目录——保证不管有没有人回复，文件都一定会生成。
+
+## 可选功能：把动画短片渲染成视频
+
+下面这些都是**可选的**——两份文字成稿才是默认产出，除非你明确提出要求，不会自动触发渲染，因为渲染更慢，有时候还有真实的生成成本。
+
+| 路线 | 需要什么 | 能得到什么 |
+|---|---|---|
+| **路线一——手绘风 Remotion 视频** | 一个单独安装好的 `story-to-handdrawn-video` Claude Code skill（不属于这个仓库——是另一个项目，你的机器上要提前装好） | `scripts/screenplay_to_prose.py` 把剧本转成那个工具要的散文格式（自动生成它需要的 `--character-lock` 和 `--visual-plan`，并对照 `references/style_keyword_mapping.md` 从它内置的20种画风里推荐3-5个候选），产出一份**静音**、**竖屏3:4** 的 MP4。渲染范围每次都会先问你——`teaser`（约1场）、`highlight`（约4场，推荐）、`full`（全部场次，会明确提醒很慢）——可以先跑 `--scope preview` 看真实的场次选择和镜头数再决定。 |
+| **路线二——更丰富的AI视频生成提示词** | 不需要任何依赖，纯文本产出 | `scripts/screenplay_to_video_prompts.py` 给每一场戏生成一段可以直接粘贴使用的提示词，供你手动放进即梦、Seedance或类似的文生视频工具。没有接API、没有浏览器自动化、没有凭证——这台机器目前还没接上这些，所以这一步就设计成手动操作（`references/video_render_routes.md` 里记录了后续自动化的路线图，还没实现）。 |
+
+两个脚本共用同一个版权安全解析器（`scripts/_screenplay_parser.py`）：只读取组装文档里动画短片那一段，绝不读取讨论真实电影的解说词部分。
+
 ## 项目结构
 
 ```
 AGENTS.md                             # 唯一权威来源：工作流、版权规则、产出格式要求
 CLAUDE.md                             # 指向 AGENTS.md，覆盖"Claude Code 直接打开本仓库"的情况
 scripts/
-└── fetch_content.py                  # 参考视频抓取（yt-dlp + 本地语音转写兜底）
+├── fetch_content.py                  # 参考视频抓取（yt-dlp + 本地语音转写兜底）
+├── _screenplay_parser.py             # 路线一/二共用的版权安全剧本解析器
+├── screenplay_to_prose.py            # 路线一：剧本 → story-to-handdrawn-video 输入格式
+└── screenplay_to_video_prompts.py    # 路线二：剧本 → 即梦/Seedance 可粘贴提示词
 references/
 ├── script_format_guide.md            # 分幕格式、钩子设计模式、收尾方式
 ├── animation_fable_guide.md          # 寓言设计方法论：载体意象、循环结构、
 │                                        对照角色、语气拿捏
 ├── used_concepts_log.md              # 已用过的动画核心意象记录（只追加不覆盖）
-└── output_template.md                # 最终文档拼装模板
+├── output_template.md                # 最终文档拼装模板
+├── video_render_routes.md            # 路线一/二具体机制、渲染范围分档、路线图
+└── style_keyword_mapping.md          # 剧本风格关键词 → story-to-handdrawn-video 画风id映射表
 examples/
 └── ...                                # 一次真实产出，作为质量基准留档
 .claude/skills/cine-remix/SKILL.md    # Claude Code 适配入口 → 指向 AGENTS.md
@@ -98,12 +129,15 @@ examples/
 - 抓取参考视频时，只提炼它的**手法**（钩子类型、节奏、论证结构），不沿用它的具体措辞、段子或论证过程。
 - 动画短片是100%虚构的：新世界观、新角色、新情节。判断标准很简单——没看过原电影的人，不应该单看剧本就认出这是哪部电影。
 - 真实的传记/历史事实可以自由引用（事实本身不受版权保护），但前提是模型有把握它是准确的——拿不准的细节要么留有余地，要么直接不用，绝不编造。
+- 这条边界延伸到视频渲染环节：两个转换脚本都只读取组装文档里动画短片那一段，绝不读取解说词部分。
 
 完整规则见 [`AGENTS.md`](AGENTS.md)。
 
 ## 依赖
 
 `fetch_content.py` 依赖 [`yt-dlp`](https://github.com/yt-dlp/yt-dlp)，缺失时会在首次使用时自动安装（依次尝试 `brew`、`pipx`、`pip --user`）。本地语音转写 [`faster-whisper`](https://github.com/SYSTRAN/faster-whisper) 只在参考视频既没有可用字幕、简介也不够充实时才会作为最后手段触发，且仅在"链接模式"下需要。纯靠电影名字生成时完全不需要额外依赖。
+
+`screenplay_to_video_prompts.py`（路线二）除了 Python 3 之外不需要任何依赖——它只产出文本。`screenplay_to_prose.py`（路线一）本身也只需要 Python 3，但它产出的内容要真正渲染成视频，需要另外单独搭建好 `story-to-handdrawn-video` 这个项目/skill（Node 20+、ffmpeg，以及一个出图后端）——这部分不在本仓库范围内。
 
 ## 项目状态
 
