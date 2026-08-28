@@ -108,6 +108,7 @@ scripts/
 └── screenplay_to_video_prompts.py    # 路线二：剧本 → 即梦/Seedance 可粘贴提示词
 references/
 ├── script_format_guide.md            # 分幕格式、钩子设计模式、收尾方式
+├── narration_style_library.md        # 解说人设风格库：各人设的钩子/转折句/收尾措辞变体
 ├── animation_fable_guide.md          # 寓言设计方法论：载体意象、循环结构、
 │                                        对照角色、语气拿捏
 ├── used_concepts_log.md              # 已用过的动画核心意象记录（只追加不覆盖）

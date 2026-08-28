@@ -108,6 +108,7 @@ scripts/
 └── screenplay_to_video_prompts.py    # Route 2: screenplay → paste-ready Jimeng/Seedance prompts
 references/
 ├── script_format_guide.md            # Act structure, hook patterns, closing devices
+├── narration_style_library.md        # Narrator persona roster: hook/transition/sign-off wording variants by persona
 ├── animation_fable_guide.md          # Fable design method: carrier imagery, cyclic
 │                                        structure, foil characters, tone balance
 ├── used_concepts_log.md              # Append-only log of fable premises already used

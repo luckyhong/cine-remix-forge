@@ -91,6 +91,30 @@ See [`references/script_format_guide.md`](references/script_format_guide.md) for
 patterns, per-act closing-line conventions, and pacing guidance. Reuse the *method*, not any
 specific example sentence in that file.
 
+Also decide the narration persona before drafting the hook — persona shapes how the thesis
+gets phrased, so it should be picked here, not bolted on after Step 3 is written. See
+[`references/narration_style_library.md`](references/narration_style_library.md) for the full
+roster and per-persona wording rules.
+
+- If the user's original request already signals a tone ("写个吐槽向的", "温情一点",
+  "悬疑感拉满", "学术一点别整虚的"), match it to the corresponding persona and just state which
+  one you're using — no need to ask.
+- If there's no tone signal in the request, ask once, using the same interaction pattern as
+  Step 7 (plain-text question, numbered options, stated default):
+
+  ```
+  这次的深度解说词想用哪种叙述人设？
+  1. 严肃反转型（默认，目前的标准调性——论点层层反转，判断句克制有分量）
+  2. 学术严谨型（克制冷静，重证据轻煽情，像一篇讲究的影评）
+  3. 犀利吐槽型（辛辣吐槽，敢损，但笑点不越过悲剧的红线）
+  4. 温情人文型（贴近角色，情感真挚，收尾更像一封信）
+  5. 悬疑节奏型（短句快节奏，留悬念，每幕结尾都埋一个钩子）
+  不回复的话默认用 1. 严肃反转型（跟现在的输出保持一致）。
+  ```
+
+- Non-interactive/unattended runs: default silently to 严肃反转型 — same rule as Step 7, this
+  choice must never block the script from being written.
+
 ### Step 3 — Write the full commentary script
 
 Fixed format: acts + timecodes + `【画面】`/`【音效】`/`【文案】` markers (see the template in
