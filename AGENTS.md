@@ -120,7 +120,11 @@ roster and per-persona wording rules.
 Fixed format: acts + timecodes + `【画面】`/`【音效】`/`【文案】` markers (see the template in
 `references/script_format_guide.md`).
 
-Hard requirements:
+Hard requirements (this whole list is the **film-commentary domain's default profile**, not a
+project-wide constant — it's calibrated for and validated against `examples/`, the only domain
+this repo has actually shipped so far; a future domain, e.g. a person or a historical event
+instead of a film, may reasonably need a different runtime/pacing profile of its own rather than
+inheriting this one by default):
 - Total runtime **8–16 minutes** (roughly 250–300 Chinese characters per minute at spoken
   pace — size the script accordingly; don't submit a 300-character outline and call it done).
 - A genuine **hook** at the open: a counter-intuitive either/or question, a "state the
@@ -172,6 +176,39 @@ Follow [`references/output_template.md`](references/output_template.md): comment
 first, then the animated screenplay, then a "technique cross-reference table" showing what
 device each piece used and how they echo each other. That table is a third deliverable in its
 own right — it's what makes the underlying method reusable, not just the two finished pieces.
+
+**Before moving to Step 7, self-check the assembled draft against this list** — don't rely on
+having followed each rule correctly the first time around; go back and actually verify line by
+line, and fix anything that doesn't hold up:
+
+- [ ] Commentary script runtime is genuinely 8–16 minutes at 250–300 chars/min, not a
+      lightly-padded outline (Step 3).
+- [ ] The opening hook is one of the counter-intuitive patterns, not a plain "今天聊聊..." greeting.
+- [ ] At least one cross-work comparison is present and names a **specific difference point**,
+      not just "this is similar to X."
+- [ ] The closing act does both things: a universal claim tied to the viewer's own life, and a
+      short sign-off.
+- [ ] The narration persona chosen in Step 2 is actually reflected in the hook/transition/closing
+      wording — re-read a transition sentence and confirm it matches that persona's template in
+      [`references/narration_style_library.md`](references/narration_style_library.md), not a
+      generic default.
+- [ ] Every act where narration duration falls meaningfully short of the act's timecode span has
+      a timestamped shot list per [`references/script_format_guide.md`](references/script_format_guide.md)
+      （七）— no act is left with a single vague "镜头缓缓扫过" line.
+- [ ] Copyright check: no film dialogue or source-novel text quoted beyond ~15 characters/words;
+      every historical/biographical fact is either one you're confident is accurate or explicitly
+      hedged ("据记载...") — nothing was invented for dramatic effect.
+- [ ] The animated short passes the "hasn't seen the source film" test: no reused names, no
+      recognizable specific plot beats from the real film.
+- [ ] The animated short has its echo (an opening line/symbol that returns changed at the close)
+      and at least one foil/turning-point character — it isn't the protagonist carrying the whole
+      thing alone.
+- [ ] The new carrier image was appended to
+      [`references/used_concepts_log.md`](references/used_concepts_log.md).
+- [ ] The technique cross-reference table's rows are substantive and specific to this run, not
+      filler that could apply to any film.
+
+If any box doesn't hold up, fix the draft before saving — don't note the gap and move on anyway.
 
 ### Step 7 — Save it as a markdown file (don't stop at printing it in chat)
 
