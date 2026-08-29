@@ -26,7 +26,48 @@ The document is always saved as a real `.md` file — you're asked where (see [O
 
 The workflow itself is defined once, in [`AGENTS.md`](AGENTS.md), and is **not tied to any single AI tool**. Whatever agent you point at this repository — as long as it can read a markdown file and run a Python script — can execute it.
 
+## How It Works
+
+```mermaid
+flowchart TD
+    A[Movie title only] -->|Branch B: research + web fact-check| C
+    B[Reference commentary video link] -->|Branch A: fetch_content.py, extract technique only| C
+    C[Design thesis + pick narration persona] --> D[Write commentary script: hook, 8-16 min, cross-work comparison]
+    D --> E[Design animated fable world, check concept log]
+    E --> F[Write animated screenplay: echo + foil character]
+    F --> G[Assemble + self-check vs hard requirements]
+    G --> H[Save as .md, ask where]
+    H -.->|optional, separate ask| I[Render as video: hand-drawn or AI prompts]
+
+    classDef optional stroke-dasharray: 4 4
+    class I optional
+```
+
+Both input paths converge on the same pipeline — the only difference is where Step 1's raw material comes from. Step 8 is dashed because it never runs off the same request that triggers everything above it; it needs its own explicit ask.
+
+## See It In Action
+
+The commentary script isn't generic AI-essay voice. Here's the real opening hook from `examples/`, and the same beat rewritten under a different narration persona — same film, same underlying thesis, deliberately different voice:
+
+> **① 严肃反转型** *(default)*
+> "如果一个人穷尽一生都在做'正确的事'——不闹事、不多嘴、不越界、能忍就忍——最后却依然被碾得粉身碎骨，那这到底是他活该，还是这套让他'正确'的标准，本身就是一个陷阱？"
+
+> **③ 犀利吐槽型**
+> "A、他活该，谁让他一辈子不闹事不多嘴；B、他倒霉，赶上乱世；C、都不是——这套让他显得'正确'的规矩，从头到尾就是个局，前两个选项都是烟雾弹。选C，因为老实人从来不是输给了运气。"
+
+Five personas ship today — pick one, or let your request's own phrasing pick it for you. Full roster and per-persona wording rules: [`references/narration_style_library.md`](references/narration_style_library.md).
+
 ## Works With
+
+```mermaid
+flowchart LR
+    AGENTS[AGENTS.md - single source of truth]
+    AGENTS --> CC[Claude Code SKILL.md]
+    AGENTS --> CX[Codex CLI - reads natively]
+    AGENTS --> CU[Cursor .mdc rule]
+    AGENTS --> CP[Copilot instructions]
+    AGENTS --> CHAT[Bare chat model - paste directly]
+```
 
 | Tool | How it picks this up |
 |---|---|
