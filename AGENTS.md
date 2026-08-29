@@ -130,6 +130,12 @@ Hard requirements:
   a specific point of difference — not just "this is similar to X."
 - A **closing elevation**: collapse the film's specific story into a more universal claim the
   viewer can relate to their own life, followed by a short sign-off / call to action.
+- **画面跟得上文案的疏密**: when an act's narration duration (at 250–300 chars/min) is
+  meaningfully shorter than the act's own timecode span, `【画面】` must become a timestamped
+  shot list that fills the gap with concrete techniques — never just one lazy line like
+  "镜头缓缓扫过". When narration is too dense to fit the span at all, trim the copy or adjust
+  the timecodes instead. Thresholds and the shot-technique library:
+  [`references/script_format_guide.md`](references/script_format_guide.md)（七）.
 
 ### Step 4 — Design the animated short's world
 
