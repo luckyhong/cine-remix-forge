@@ -170,7 +170,8 @@ references/
 ├── used_theses_log.md                # 已用过的解说论点角度记录（只追加不覆盖）
 ├── output_template.md                # 最终文档拼装模板
 ├── video_render_routes.md            # 路线一/二具体机制、渲染范围分档、路线图
-└── style_keyword_mapping.md          # 剧本风格关键词 → story-to-handdrawn-video 画风id映射表
+├── style_keyword_mapping.md          # 剧本风格关键词 → story-to-handdrawn-video 画风id映射表
+└── interactive_output_guide.md       # 可选第九步：交互式可视化页面设计指南
 examples/
 └── ...                                # 一次真实产出，作为质量基准留档
 .claude/skills/cine-remix/SKILL.md    # Claude Code 适配入口 → 指向 AGENTS.md

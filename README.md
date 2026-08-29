@@ -170,7 +170,8 @@ references/
 ├── used_theses_log.md                # Append-only log of commentary thesis angles already used
 ├── output_template.md                # Final document assembly template
 ├── video_render_routes.md            # Route 1 & 2 mechanics, scope tiers, roadmap
-└── style_keyword_mapping.md          # Screenplay style keywords → story-to-handdrawn-video style ids
+├── style_keyword_mapping.md          # Screenplay style keywords → story-to-handdrawn-video style ids
+└── interactive_output_guide.md       # Optional Step 9: interactive visual page design guide
 examples/
 └── ...                                # A real generated run, kept as a quality baseline
 .claude/skills/cine-remix/SKILL.md    # Claude Code adapter → defers to AGENTS.md

@@ -288,6 +288,24 @@ The top-level decision tree:
    dialogue audio, no voice, no music — dialogue becomes paraphrased on-screen captions) and
    vertical 3:4; Route 2 output is a prompt list to paste elsewhere, not a rendered video.
 
+## Optional Step 9 — Publish an interactive visual page
+
+Also **opt-in only**, same rule as Step 8: never trigger this off "写一份深度解说词" — it only
+activates on an explicit, separate ask ("发布成网页" / "做个可视化页面" / "生成一个交互页面看看" /
+"把对照表做成图").
+
+Full mechanics live in
+[`references/interactive_output_guide.md`](references/interactive_output_guide.md). Short
+version: this depends on the host tool having a "publish an interactive page" capability (e.g.
+Artifact in Claude Code) — if it doesn't, say so plainly instead of falling back to a local HTML
+file nobody will open. The page visualizes three things the assembled `.md` document can't show
+well as plain text: the full-film act timeline, a per-act 画面/文案 alignment bar (making the
+shot-density rule's output actually visible), and the technique cross-reference table as a
+connected two-column diagram instead of a markdown table. Tone must scale with the film's actual
+weight — never default to a cheerful/decorative treatment for content that involves real
+historical trauma. It's a re-presentation of already-approved content, not new content: never
+invent a filler detail to make the page feel fuller.
+
 ## Edge cases
 
 - **Can't fetch the film/video info**: report the actual error; don't fill in missing details
