@@ -126,6 +126,7 @@ references/
 ├── animation_fable_guide.md          # Fable design method: carrier imagery, cyclic
 │                                        structure, foil characters, tone balance
 ├── used_concepts_log.md              # Append-only log of fable premises already used
+├── used_theses_log.md                # Append-only log of commentary thesis angles already used
 ├── output_template.md                # Final document assembly template
 ├── video_render_routes.md            # Route 1 & 2 mechanics, scope tiers, roadmap
 └── style_keyword_mapping.md          # Screenplay style keywords → story-to-handdrawn-video style ids

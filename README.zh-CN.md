@@ -126,6 +126,7 @@ references/
 ├── animation_fable_guide.md          # 寓言设计方法论：载体意象、循环结构、
 │                                        对照角色、语气拿捏
 ├── used_concepts_log.md              # 已用过的动画核心意象记录（只追加不覆盖）
+├── used_theses_log.md                # 已用过的解说论点角度记录（只追加不覆盖）
 ├── output_template.md                # 最终文档拼装模板
 ├── video_render_routes.md            # 路线一/二具体机制、渲染范围分档、路线图
 └── style_keyword_mapping.md          # 剧本风格关键词 → story-to-handdrawn-video 画风id映射表

@@ -87,6 +87,21 @@ argue** — ideally an angle that diverges from (or productively complicates) th
 reading of the film. That's what makes a script feel deep — not vocabulary. Once the thesis is
 set, design the act structure backwards from it.
 
+Before locking the thesis in, run two checks so "diverges from the most common reading" is an
+actual verified step, not something left to happen by accident:
+
+- **External check**: name the film's most common existing reading(s) — from your own knowledge,
+  and web search if you're not confident — so the thesis can deliberately diverge from it or
+  confront it head-on, not accidentally restate it in fresh vocabulary. Applies to both Branch A
+  and Branch B; a reference video's specific wording is a separate concern already covered above.
+- **Internal check**: look up [`references/used_theses_log.md`](references/used_theses_log.md).
+  If this film has been covered before, this run's thesis must take a materially different
+  angle, not the same angle with new phrasing.
+
+Once the thesis is locked in, append one line to
+[`references/used_theses_log.md`](references/used_theses_log.md) stating it, so future runs —
+on this film or others — can check against it.
+
 See [`references/script_format_guide.md`](references/script_format_guide.md) for hook
 patterns, per-act closing-line conventions, and pacing guidance. Reuse the *method*, not any
 specific example sentence in that file.
@@ -204,7 +219,8 @@ line, and fix anything that doesn't hold up:
       and at least one foil/turning-point character — it isn't the protagonist carrying the whole
       thing alone.
 - [ ] The new carrier image was appended to
-      [`references/used_concepts_log.md`](references/used_concepts_log.md).
+      [`references/used_concepts_log.md`](references/used_concepts_log.md), and the thesis angle
+      was appended to [`references/used_theses_log.md`](references/used_theses_log.md).
 - [ ] The technique cross-reference table's rows are substantive and specific to this run, not
       filler that could apply to any film.
 
