@@ -30,9 +30,10 @@
 
 ```mermaid
 flowchart TD
-    A[只给电影名] -->|分支B：查资料+必要时网络核实| C
-    B[给一个参考解说视频链接] -->|分支A：fetch_content.py，只提取手法| C
-    C[定论点+选叙述人设] --> D[写解说词：钩子/8-16分钟/跨作品对照]
+    A[只给电影名] -->|分支B：查资料| FC
+    B[给一个参考解说视频链接] -->|分支A：fetch_content.py，只提取手法| FC
+    FC[第1.5步：强制事实核查，产出事实清单] --> C
+    C[基于已核实事实定论点+选叙述人设] --> D[写解说词：钩子过硬标准/8-16分钟/跨作品对照]
     D --> E[设计动画寓言世界，先查载体意象日志]
     E --> F[写动画剧本：首尾呼应+对照角色]
     F --> G[组装成稿+对照硬性要求自查]
@@ -43,7 +44,7 @@ flowchart TD
     class I optional
 ```
 
-两条输入路径最终汇入同一套产出流程——区别只在第一步的原始素材从哪来。第八步画成虚线，是因为它从不会被前面任何一步的请求自动触发，必须用户单独明确提出才会启动。
+两条输入路径最终汇入同一套产出流程——区别只在第一步的原始素材从哪来。第1.5步的事实核查是两条分支都必经的强制环节，且必须在定论点之前完成：论点只能建立在已核实的事实上。第八步画成虚线，是因为它从不会被前面任何一步的请求自动触发，必须用户单独明确提出才会启动。
 
 ## 实际效果长什么样
 
@@ -158,6 +159,7 @@ AGENTS.md                             # 唯一权威来源：工作流、版权�
 CLAUDE.md                             # 指向 AGENTS.md，覆盖"Claude Code 直接打开本仓库"的情况
 scripts/
 ├── fetch_content.py                  # 参考视频抓取（yt-dlp + 本地语音转写兜底）
+├── lint_output.py                     # 成稿机器校验（Step 6 的硬闸门）
 ├── _screenplay_parser.py             # 路线一/二共用的版权安全剧本解析器
 ├── screenplay_to_prose.py            # 路线一：剧本 → story-to-handdrawn-video 输入格式
 └── screenplay_to_video_prompts.py    # 路线二：剧本 → 即梦/Seedance 可粘贴提示词
@@ -166,14 +168,20 @@ references/
 ├── narration_style_library.md        # 解说人设风格库：各人设的钩子/转折句/收尾措辞变体
 ├── animation_fable_guide.md          # 寓言设计方法论：载体意象、循环结构、
 │                                        对照角色、语气拿捏
+├── edit_delivery_guide.md            # 素材清单、剪辑执行表、配音稿规范——让文档可以直接开工
+├── fact_check_guide.md               # 第1.5步：核查什么、"我确定"错在哪、事实清单格式
 ├── used_concepts_log.md              # 已用过的动画核心意象记录（只追加不覆盖）
 ├── used_theses_log.md                # 已用过的解说论点角度记录（只追加不覆盖）
+├── used_devices_log.md               # 已用过的钩子类型/跨作品对照/幕结构记录（只追加不覆盖）
 ├── output_template.md                # 最终文档拼装模板
 ├── video_render_routes.md            # 路线一/二具体机制、渲染范围分档、路线图
 ├── style_keyword_mapping.md          # 剧本风格关键词 → story-to-handdrawn-video 画风id映射表
 └── interactive_output_guide.md       # 可选第九步：交互式可视化页面设计指南
 examples/
-└── ...                                # 一次真实产出，作为质量基准留档
+└── ...                                # 一次真实产出留档。注意：它早于 2026-08-31 的新规则
+│                                        （事实清单、剪辑交付、封面、时长单一信源），跑 linter
+│                                        会因缺少这些区块报 17 个 FAIL——它仍是文风/腔调的参考
+│                                        样本，但不再是格式基准。格式基准看《高山下的花环》。
 .claude/skills/cine-remix/SKILL.md    # Claude Code 适配入口 → 指向 AGENTS.md
 .cursor/rules/cine-remix.mdc          # Cursor 适配入口 → 指向 AGENTS.md
 .github/copilot-instructions.md       # Copilot 适配入口 → 指向 AGENTS.md

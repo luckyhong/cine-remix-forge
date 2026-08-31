@@ -30,9 +30,10 @@ The workflow itself is defined once, in [`AGENTS.md`](AGENTS.md), and is **not t
 
 ```mermaid
 flowchart TD
-    A[Movie title only] -->|Branch B: research + web fact-check| C
-    B[Reference commentary video link] -->|Branch A: fetch_content.py, extract technique only| C
-    C[Design thesis + pick narration persona] --> D[Write commentary script: hook, 8-16 min, cross-work comparison]
+    A[Movie title only] -->|Branch B: research| FC
+    B[Reference commentary video link] -->|Branch A: fetch_content.py, extract technique only| FC
+    FC[Step 1.5: mandatory fact-check, build the 事实清单] --> C
+    C[Design thesis on verified facts + pick narration persona] --> D[Write commentary script: hook bars, 8-16 min, cross-work comparison]
     D --> E[Design animated fable world, check concept log]
     E --> F[Write animated screenplay: echo + foil character]
     F --> G[Assemble + self-check vs hard requirements]
@@ -43,7 +44,7 @@ flowchart TD
     class I optional
 ```
 
-Both input paths converge on the same pipeline — the only difference is where Step 1's raw material comes from. Step 8 is dashed because it never runs off the same request that triggers everything above it; it needs its own explicit ask.
+Both input paths converge on the same pipeline — the only difference is where Step 1's raw material comes from. Step 1.5 is a mandatory gate on both branches and runs *before* the thesis is designed: a thesis may only rest on verified facts. Step 8 is dashed because it never runs off the same request that triggers everything above it; it needs its own explicit ask.
 
 ## See It In Action
 
@@ -158,6 +159,7 @@ AGENTS.md                             # Source of truth: workflow, copyright rul
 CLAUDE.md                             # Pointer to AGENTS.md, for Claude Code opened directly on this repo
 scripts/
 ├── fetch_content.py                  # Reference-video fetch (yt-dlp + local ASR fallback)
+├── lint_output.py                     # Mechanical checks on an assembled document (Step 6 gate)
 ├── _screenplay_parser.py             # Shared, copyright-safe screenplay parser (route 1 & 2)
 ├── screenplay_to_prose.py            # Route 1: screenplay → story-to-handdrawn-video input
 └── screenplay_to_video_prompts.py    # Route 2: screenplay → paste-ready Jimeng/Seedance prompts
@@ -166,14 +168,21 @@ references/
 ├── narration_style_library.md        # Narrator persona roster: hook/transition/sign-off wording variants by persona
 ├── animation_fable_guide.md          # Fable design method: carrier imagery, cyclic
 │                                        structure, foil characters, tone balance
+├── edit_delivery_guide.md            # Source manifest, cut-sheet timeline, VO script spec — makes the doc shootable
+├── fact_check_guide.md               # Step 1.5: what to verify, what "I'm sure" gets wrong, the 事实清单
 ├── used_concepts_log.md              # Append-only log of fable premises already used
 ├── used_theses_log.md                # Append-only log of commentary thesis angles already used
+├── used_devices_log.md               # Append-only log of hook types, comparison films, act structures
 ├── output_template.md                # Final document assembly template
 ├── video_render_routes.md            # Route 1 & 2 mechanics, scope tiers, roadmap
 ├── style_keyword_mapping.md          # Screenplay style keywords → story-to-handdrawn-video style ids
 └── interactive_output_guide.md       # Optional Step 9: interactive visual page design guide
 examples/
-└── ...                                # A real generated run, kept as a quality baseline
+└── ...                                # A real generated run. NOTE: it predates the 2026-08-31
+│                                        rules (fact list, delivery block, cover, single-source
+│                                        timing) and fails 17 linter checks for missing those
+│                                        blocks — useful as a prose/voice reference, not as a
+│                                        format baseline. Run `lint_output.py` on it to see.
 .claude/skills/cine-remix/SKILL.md    # Claude Code adapter → defers to AGENTS.md
 .cursor/rules/cine-remix.mdc          # Cursor adapter → defers to AGENTS.md
 .github/copilot-instructions.md       # Copilot adapter → defers to AGENTS.md

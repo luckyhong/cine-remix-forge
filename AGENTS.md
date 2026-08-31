@@ -80,10 +80,50 @@ critical reception if you know it. These facts need to hold up — hedge or skip
 not sure of rather than inventing a specific year, a person's fate, or a reception detail to
 make the piece feel more substantial.
 
+### Step 1.5 — Fact-check before you design anything (mandatory, both branches)
+
+**Do this before Step 2, not after.** Full method:
+[`references/fact_check_guide.md`](references/fact_check_guide.md).
+
+This step exists because a real test run (《高山下的花环》, 2026-08-31) passed every checklist in
+this document and still shipped three factual errors — and its entire thesis was built on one of
+them, so the correction wasn't an edit, it was a rewrite. The old flow had no step that owned
+"is this true": `外部查重` owns *originality*, not accuracy, and "facts you're confident about"
+is self-assessed, which never triggers because the model is always confident about training data.
+
+Two rules override everything else here:
+
+- **Highest-confidence facts are the highest-priority facts to check.** All three errors in that
+  run landed on information the run itself had declared "highly stable, changes little over the
+  years": the production studio, the awards, and how a famous scene actually ended. Famous scenes
+  are dangerous precisely because their *first half* (who got angry, what they said) circulates
+  widely while their *ending* gets filled in by narrative inertia.
+- **Unverified means unwritten — hedging is not a substitute.** "据记载……" is for genuinely
+  disputed facts, not for "I didn't look it up." If you can't verify it, cut the sentence and
+  write one you can.
+
+Produce a **事实清单** table (format in the guide; it ships in the document header per
+[`references/output_template.md`](references/output_template.md)). Tier-1 (the facts the thesis
+rests on, and how famous scenes actually ended) and tier-2 (studio, year, awards, source
+publication) entries **must be externally searched — "I know this" is not accepted**. Tier-1
+load-bearing facts need two independent sources. Awards must be precise to *which edition, which
+award, won vs. merely nominated* — Chinese film awards (金鸡 vs. 百花) are a known trap.
+
+Then do the step most likely to be skipped: **ask whether the verified reality is more
+interesting than what you had planned to argue.** In the run above it plainly was — "justice
+depends on who happens to be in the room" (built on a false premise) became "everything that
+got honored was handed over privately; nothing the rules owed ever arrived" (built on what the
+film actually shows). Fact-checking is not only mine-clearing; it is a source of depth.
+
+Tell the user what the check found in one or two lines before moving on — a silent pass and a
+silent skip look identical from their side.
+
 ### Step 2 — Design the script's thesis and structure
 
-Don't start from a plot recap. First decide **the core thesis this particular script will
-argue** — ideally an angle that diverges from (or productively complicates) the most common
+Don't start from a plot recap. **Start from the 事实清单 Step 1.5 just produced** — the thesis
+must rest only on ✅ entries, and you must be able to name which entries it rests on (those are
+its 承重事实). A thesis that needs an unverified fact is not a thesis yet; go verify it or pick
+a different angle. Then decide **the core thesis this particular script will argue** — ideally an angle that diverges from (or productively complicates) the most common
 reading of the film. That's what makes a script feel deep — not vocabulary. Once the thesis is
 set, design the act structure backwards from it.
 
@@ -100,7 +140,10 @@ actual verified step, not something left to happen by accident:
 
   "Search if you're not confident" is too easy to rationalize past — the model almost always
   *feels* confident about training data, so the search never actually triggers. Writing a
-  confidence label down makes the skip visible instead of invisible. Applies to both Branch A and
+  confidence label down makes the skip visible instead of invisible. **Since Step 1.5 now makes
+  an external search mandatory anyway, `未搜索` here is close to indefensible** — you are already
+  online for the facts, and "which readings of this film are common" costs one more query. Treat
+  the 未搜索 branch as reserved for a genuinely offline environment, and say so when you use it. Applies to both Branch A and
   Branch B; a reference video's specific wording is a separate concern already covered above.
 
   A "common reading" declaration by itself is not enough — a run was found to have searched the
@@ -121,6 +164,15 @@ actual verified step, not something left to happen by accident:
 - **Internal check**: look up [`references/used_theses_log.md`](references/used_theses_log.md).
   If this film has been covered before, this run's thesis must take a materially different
   angle, not the same angle with new phrasing.
+- **Sameness check (讲法, not 论点)**: look up
+  [`references/used_devices_log.md`](references/used_devices_log.md) and obey its four hard rules —
+  no cross-work comparison film reused within the last 5 runs, no hook type used 3 times running,
+  don't land on the same act count every time, and don't always place the "common reading" act in
+  the same slot. Two different logs already guard the *thesis* and the *fable's carrier image*;
+  neither notices that six consecutive runs opened the same way and shaped the acts the same way.
+  What an audience actually experiences as "this channel repeats itself" is usually this, not the
+  thesis. Append a line to that log once the hook type, comparison work, and act structure are
+  settled.
 - **Third-layer check**: your thesis already diverges from the common reading (external check) —
   now find the strongest objection *to your own thesis itself*, not a restatement of the common
   reading's objection. This is [`references/script_format_guide.md`](references/script_format_guide.md)
@@ -186,21 +238,74 @@ project-wide constant — it's calibrated for and validated against `examples/`,
 this repo has actually shipped so far; a future domain, e.g. a person or a historical event
 instead of a film, may reasonably need a different runtime/pacing profile of its own rather than
 inheriting this one by default):
-- Total runtime **8–16 minutes** (roughly 250–300 Chinese characters per minute at spoken
-  pace — size the script accordingly; don't submit a 300-character outline and call it done).
-- A genuine **hook** at the open: a counter-intuitive either/or question, a "state the
-  conclusion, then undercut it" opening, or a striking scene fragment — not "Hi everyone,
-  today let's talk about a movie."
+- Total runtime **8–16 minutes**, and keep two different numbers straight — conflating them has
+  already caused a false defect report (七.2):
+  - **语速 (speaking rate)** = characters ÷ seconds actually spoken → **250–300 chars/min**.
+  - **密度 (timeline density)** = characters ÷ act duration → **200–260 chars/min**.
+  The difference between them is screen time with no narration, which is legitimate and designed —
+  it gets covered by cut-sheet rows marked 无旁白, not by padding the copy. Under 200 means the
+  timecodes are stretched (tighten them rather than adding words); over 260 means the visuals never
+  breathe; `字数 × 0.2 > 幕时长 × 1.1` is a hard violation (unreadable at any sane pace). Don't
+  submit a 300-character outline and call it done.
+- A genuine **hook** at the open. Picking one of the four patterns is not enough — "isn't a
+  plain greeting" was the only bar here for a long time, and it is far too low for a channel
+  where the first 15 seconds decide completion rate. The hook must clear every content bar
+  in [`references/script_format_guide.md`](references/script_format_guide.md) 2.1: **a concrete,
+  filmable anomalous fact lands within the first 15 seconds** (an abstract rhetorical question
+  may follow it, never lead); **a one-sentence information gap the viewer could say out loud**
+  (write that sentence down as a self-check — if it comes out as "what is this film about," the
+  hook fails); **no background exposition in the hook act at all** — director, year, source
+  novel, awards all belong to act two; and the **双观众测试** — a film-commentary audience always
+  splits in two, and a hook that works on only one half throws away half the completion rate:
+  someone who hasn't seen the film needs a gap that stands on its own with zero prior knowledge,
+  and someone who has seen it needs something that overturns the impression they already hold.
+  Write down both reactions; if either is "so what?" or "I already knew that," rewrite. The strongest hook material is usually whatever Step 1.5's
+  fact-check turned up that contradicts the popular impression, so don't finalize the opening
+  before that check is done.
 - At least **one cross-work comparison** (a real, thematically related work), used to sharpen
-  a specific point of difference — not just "this is similar to X."
+  a specific point of difference — not just "this is similar to X." Check the comparison film
+  against [`references/used_devices_log.md`](references/used_devices_log.md) first: reusing one
+  within 5 runs reads to an audience as "this channel has only seen two movies."
 - A **closing elevation**: collapse the film's specific story into a more universal claim the
   viewer can relate to their own life, followed by a short sign-off / call to action.
-- **画面跟得上文案的疏密**: when an act's narration duration (at 250–300 chars/min) is
-  meaningfully shorter than the act's own timecode span, `【画面】` must become a timestamped
-  shot list that fills the gap with concrete techniques — never just one lazy line like
-  "镜头缓缓扫过". When narration is too dense to fit the span at all, trim the copy or adjust
-  the timecodes instead. Thresholds and the shot-technique library:
-  [`references/script_format_guide.md`](references/script_format_guide.md)（七）.
+- **画面 must be chosen before it is measured**: the density rules below are an engineering
+  fix (don't leave screen time empty); they do not make the visuals *good*, and shipped runs
+  have passed every density check while describing shots as "交叉剪辑三条线" — compliant and
+  unwatchable. Apply [`references/script_format_guide.md`](references/script_format_guide.md)
+  7.0 to **every** 【画面】 field, including the ones that never trigger a shot list: the first
+  shot of each act is that act's visual evidence, not atmosphere; prefer a **pair that can be
+  intercut** over one pretty frame; **give every absence a picture** (an empty line on a roster,
+  a drum that doesn't sound) wherever the thesis says "never" or "didn't"; and the four banned
+  phrasings ("镜头缓缓扫过", "快速闪回若干画面", "用蒙太奇串起…", "配合文案节奏切换") are
+  unusable because an editor cannot act on them.
+- A **剪辑交付 block** — this is what turns the file from a creative document into one someone can
+  actually cut from. Full spec:
+  [`references/edit_delivery_guide.md`](references/edit_delivery_guide.md). Three tables, all
+  required: a **素材清单** (every distinct source clip, deduplicated, each with a
+  scrub-recognizable visual signature and a **`⬜ 待填` timecode column — never invent a source
+  timecode**, a wrong one is worse than none because the editor will go looking for it; reused
+  shots must be flagged in the 用在 column, since the open/close echo this workflow always builds
+  means some frames are deliberately used twice); a **剪辑执行表** covering the whole film shot by
+  shot, with continuous in-points whose durations sum exactly to the runtime; and **配音提示**
+  (target chars/min, per-act character counts to check the read against, the one line that is the
+  film's emotional peak, pause marks, and where — or whether — a channel intro goes).
+- **【文案】 is the VO script, not a draft to be rewritten before recording**: no **breath group**
+  — the run of characters between two punctuation marks — over ~40 characters, and numerals and
+  ordinals spelled out as spoken ("第八届", not "第8届"). Measure between punctuation, not between
+  full stops: a 90-character sentence carrying six commas reads fine aloud, while 45 characters
+  with no comma at all is what runs the reader out of breath. When it trips, add punctuation
+  rather than chopping the sentence up — chopping destroys the long-buildup-into-short-verdict
+  rhythm the act structure depends on.
+- A **封面提案** at the end of the script (format: 7.0's sibling section 八): one cover frame —
+  which must be a shot that already appears in a 【画面】 field, not a new invention — plus a
+  ≤12-character cover line and one alternate. The cover line must open the *same* information
+  gap the hook closes. Clickbait formulas (震惊/细思极恐/99%的人没看懂) are out: they trade
+  against the depth this whole workflow exists to produce.
+- **One source of truth for timing**: `【画面】` carries the *visual argument* (which shots, and
+  why) and **never a duration, a shot count, or a timecode** — all of that lives in the cut sheet.
+  Two places holding the same numbers is not redundancy, it is a guarantee that an edit to one
+  will contradict the other; that exact failure has already been observed. See
+  [`references/script_format_guide.md`](references/script_format_guide.md) 七.0.
 
 ### Step 4 — Design the animated short's world
 
@@ -249,9 +354,25 @@ own right — it's what makes the underlying method reusable, not just the two f
 having followed each rule correctly the first time around; go back and actually verify line by
 line, and fix anything that doesn't hold up:
 
-- [ ] Commentary script runtime is genuinely 8–16 minutes at 250–300 chars/min, not a
-      lightly-padded outline (Step 3).
-- [ ] The opening hook is one of the counter-intuitive patterns, not a plain "今天聊聊..." greeting.
+- [ ] **Run the linter and get a clean pass** — `python3 scripts/lint_output.py <the .md>`. It
+      mechanically checks act-timecode continuity, total runtime, 语速/密度 bands per act, breath
+      groups ≤40 chars, that no 【画面】 field carries a duration/shot-count/timecode (七.0's single
+      source of truth), the four banned shot phrasings, one bolded verdict per act, the hook's
+      first 15 seconds being free of exposition, cut-sheet in-point continuity and its sum matching
+      the runtime, source-manifest ↔ cut-sheet agreement in both directions, that every source
+      timecode is still `⬜ 待填` rather than fabricated, tier-1/2 fact rows all ✅, and the cover
+      line's length. These were seven checklist boxes until 2026-08-31; boxes this mechanical get
+      ticked wholesale on a "felt like I did that" pass, which is the very failure Step 6.5 exists
+      to catch — so they are now executed instead of attested. **A FAIL is a blocker, not a note.**
+- [ ] The opening hook clears every bar in `script_format_guide.md` 2.1 (A–F), not just "isn't a
+      plain 今天聊聊 greeting": a concrete filmable anomalous fact inside 15 seconds; **the
+      one-sentence viewer question written out explicitly** (write it in the working note — if it
+      reads "what's this film about," rewrite the hook); zero background exposition (director /
+      year / source novel / awards) anywhere in the hook act; and it survives the restate test.
+- [ ] `used_devices_log.md`'s four hard rules all hold for this run (comparison film not reused
+      within 5 runs; hook type not the third consecutive use; act count not the third identical
+      one; the common-reading act is not in the default slot for the Nth time running), and the
+      new line was appended.
 - [ ] At least one cross-work comparison is present and names a **specific difference point**,
       not just "this is similar to X."
 - [ ] The closing act does both things: a universal claim tied to the viewer's own life, and a
@@ -263,13 +384,6 @@ line, and fix anything that doesn't hold up:
       wording — re-read a transition sentence and confirm it matches that persona's template in
       [`references/narration_style_library.md`](references/narration_style_library.md), not a
       generic default.
-- [ ] Every act where narration duration falls meaningfully short of the act's timecode span has
-      a timestamped shot list per [`references/script_format_guide.md`](references/script_format_guide.md)
-      （七）— no act is left with a single vague "镜头缓缓扫过" line, **and no single technique
-      dominates as the "延展" gap-filler in more than half the triggering acts (七.4.1)** —
-      literally count which technique is dominant in each triggering act before checking this box.
-      **A "（延展）" block's internal shot rhythm matches the chosen persona's 镜头节奏（七.4.2）**
-      — a fast-cut persona's extended block is built from several short shots, not one long hold.
 - [ ] Copyright check: no film dialogue or source-novel text quoted beyond ~15 characters/words;
       every historical/biographical fact is either one you're confident is accurate or explicitly
       hedged ("据记载...") — nothing was invented for dramatic effect.
@@ -340,7 +454,22 @@ a working note you can discard after fixing what it finds):
    the script goes beyond the detail, it's a repackaging, not a reversal — go add the extension or
    pick a different load-bearing detail.
 
-If any of the five produces a "no, I can't point to that" answer, that is a finding — fix the
+6. **Fact-check falsification**: pick the **two facts in the script you feel most certain about**
+   — not the ones you feel shakiest on — and state, for each, the specific source that confirmed
+   it in Step 1.5. This ordering is deliberate and is the whole point of the item: on 2026-08-31
+   all three shipped errors were facts the run had explicitly rated as stable and obvious, while
+   every fact it felt unsure about was either checked or cut. If your answer for either one is a
+   paraphrase of "everyone knows this," you have just reproduced that failure — go search it now.
+   Then, separately: name any famous scene the script describes and quote the sentence stating
+   **how it actually ended**. A scene whose ending you cannot cite is a scene whose ending you
+   inferred.
+
+7. **Hook cold-read**: read only the first act's 【文案】, as if you had never heard of this film,
+   and write the single question it makes you want answered. Then compare that question to the
+   thesis. If the question is vague ("what happens next?"), or if answering it wouldn't require
+   the thesis, the hook is decorative — rewrite it against 2.1 before saving.
+
+If any of the seven produces a "no, I can't point to that" answer, that is a finding — fix the
 draft, then re-answer that one item to confirm the fix actually lands (don't just assume it
 does). This pass is not optional, and skipping it because Step 6's checklist already passed is
 exactly the mistake this section exists to prevent.
