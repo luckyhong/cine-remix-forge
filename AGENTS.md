@@ -100,27 +100,53 @@ actual verified step, not something left to happen by accident:
 
   "Search if you're not confident" is too easy to rationalize past — the model almost always
   *feels* confident about training data, so the search never actually triggers. Writing a
-  confidence label down makes the skip visible instead of invisible. A 置信度中/低 declaration
-  isn't itself a failure, but it's a promise: it means you still have to go check whether *your
-  own thesis's contrarian angle* — not just the "common reading" you named — is already common in
-  existing criticism. Applies to both Branch A and Branch B; a reference video's specific wording
-  is a separate concern already covered above.
+  confidence label down makes the skip visible instead of invisible. Applies to both Branch A and
+  Branch B; a reference video's specific wording is a separate concern already covered above.
+
+  A "common reading" declaration by itself is not enough — a run was found to have searched the
+  topic-level reading in good faith, declared 已搜索确认, and still built its "reversal" around a
+  specific plot detail (a line, a scene, a single observation) that was *itself* already one of
+  the most commonly-discussed details of the film, making the "reversal" a repackaging of two
+  already-common observations rather than a genuinely new one. So: once the thesis is designed,
+  name the **single most load-bearing specific detail** it depends on — the one detail without
+  which the argument would collapse — and separately declare whether *that detail's
+  interpretation* (not just the film's general reading) is itself already commonly discussed:
+
+  `关键细节查重：[细节] 本身已经是常见解读的一部分 / 本身不算常见解读`
+
+  If it's already common (often true — famous scenes are famous because they're already
+  discussed), that's not disqualifying, but the depth then has to come from how you *recombine or
+  extend* it, not from presenting the detail's existence as the reversal itself. Say explicitly in
+  the declaration what the added value is beyond the detail being pointed out.
 - **Internal check**: look up [`references/used_theses_log.md`](references/used_theses_log.md).
   If this film has been covered before, this run's thesis must take a materially different
   angle, not the same angle with new phrasing.
 - **Third-layer check**: your thesis already diverges from the common reading (external check) —
-  now name the single strongest objection *to your own thesis itself*, not a restatement of the
-  common reading's objection. This is [`references/script_format_guide.md`](references/script_format_guide.md)
-  六's "third layer": intuitive reading → your reversal → this reversal complicated further. If
-  you can't state an objection a sharp viewer would actually raise, your reversal is probably too
-  clean to be the deepest available reading. Decide which specific act will engage it (usually the
-  closing act, but any specific act is valid) — the act you name must contain an actual sentence
-  that states the objection and answers it, not just gesture near it.
+  now find the strongest objection *to your own thesis itself*, not a restatement of the common
+  reading's objection. This is [`references/script_format_guide.md`](references/script_format_guide.md)
+  六's "third layer": intuitive reading → your reversal → this reversal complicated further.
+
+  Generate **at least two structurally different objections** first — not two phrasings of the
+  same idea, two different angles of attack (e.g., one that challenges the thesis's *evidence* —
+  "doesn't this one scene actually cut the other way" — and one that challenges its *underlying
+  logic or motive framing* — "even granting the evidence, isn't the deeper driver something your
+  thesis doesn't name"). A run was found to state and answer a real objection while a harder,
+  structurally different one — attacking the thesis's whole framing rather than one scene — went
+  unconsidered, because the first objection that came to mind was answerable and nothing forced a
+  comparison against a second. Compare the two, and engage **whichever one is actually harder to
+  answer**, not whichever occurred to you first or is easiest to rebut. If you can't generate two
+  structurally distinct objections, your reversal is probably too clean to be the deepest
+  available reading — go back and complicate it further before drafting Step 3.
+
+  Decide which specific act will engage the chosen objection (usually the closing act, but any
+  specific act is valid) — the act you name must contain an actual sentence that states the
+  objection and answers it, not just gesture near it.
 
 Once the thesis is locked in, append one line to
-[`references/used_theses_log.md`](references/used_theses_log.md) stating it **and the
-third-layer objection it had to survive**, so future runs — on this film or others — can check
-against both the angle and the depth achieved.
+[`references/used_theses_log.md`](references/used_theses_log.md) stating it, **the load-bearing
+detail and its own-familiarity declaration**, and **both candidate objections with which one was
+chosen and why**, so future runs — on this film or others — can check against the angle, the
+depth achieved, and see the objection that was set aside.
 
 See [`references/script_format_guide.md`](references/script_format_guide.md) for hook
 patterns, per-act closing-line conventions, and pacing guidance. Reuse the *method*, not any
@@ -229,7 +255,10 @@ line, and fix anything that doesn't hold up:
 - [ ] At least one cross-work comparison is present and names a **specific difference point**,
       not just "this is similar to X."
 - [ ] The closing act does both things: a universal claim tied to the viewer's own life, and a
-      short sign-off.
+      short sign-off. A fast-paced persona (e.g. ⑤悬疑节奏型) can and should keep this brief —
+      "收得快，不做长篇抒情" is about length and tone, not permission to drop the viewer
+      connection entirely; a bare abstract judgment with no link to the viewer's own life doesn't
+      satisfy this even if it's punchy.
 - [ ] The narration persona chosen in Step 2 is actually reflected in the hook/transition/closing
       wording — re-read a transition sentence and confirm it matches that persona's template in
       [`references/narration_style_library.md`](references/narration_style_library.md), not a
@@ -239,11 +268,15 @@ line, and fix anything that doesn't hold up:
       （七）— no act is left with a single vague "镜头缓缓扫过" line, **and no single technique
       dominates as the "延展" gap-filler in more than half the triggering acts (七.4.1)** —
       literally count which technique is dominant in each triggering act before checking this box.
+      **A "（延展）" block's internal shot rhythm matches the chosen persona's 镜头节奏（七.4.2）**
+      — a fast-cut persona's extended block is built from several short shots, not one long hold.
 - [ ] Copyright check: no film dialogue or source-novel text quoted beyond ~15 characters/words;
       every historical/biographical fact is either one you're confident is accurate or explicitly
       hedged ("据记载...") — nothing was invented for dramatic effect.
-- [ ] The 外部查重 declaration is present in the document header in the exact
-      `已搜索确认.../未搜索...置信度...` format — not skipped, not vague.
+- [ ] All four Step 2 declarations are present in the document header, not skipped or vague:
+      外部查重 (`已搜索确认.../未搜索...置信度...`), 关键细节查重 (with the added-value note if
+      the detail is already common), and 三层反驳 (both candidate objections named, with which
+      one was chosen and why).
 - [ ] The animated short passes the "hasn't seen the source film" test: no reused names, no
       recognizable specific plot beats from the real film.
 - [ ] The animated short has its echo (an opening line/symbol that returns changed at the close)
@@ -277,9 +310,14 @@ passes, before Step 7.
 Answer each of these in writing (a few lines each is enough — this isn't a new deliverable, it's
 a working note you can discard after fixing what it finds):
 
-1. **Thesis counter-argument**: quote the exact sentence (or two) in the script where the
+1. **Thesis counter-argument**: quote the exact sentence (or two) in the script where the chosen
    third-layer objection (Step 2) is actually stated and answered. If you can't point to a
-   specific sentence, it isn't there — go add it, don't describe it in the abstract.
+   specific sentence, it isn't there — go add it, don't describe it in the abstract. Then look
+   back at the *other* candidate objection you generated and set aside — reread it once more and
+   confirm it's genuinely the weaker of the two, not just the one that happened to get picked
+   first. A run was found to answer a real objection while a structurally harder one (attacking
+   the thesis's whole framing, not one scene) went unconsidered — this re-check exists specifically
+   to catch that.
 2. **Table row labels**: for each row in the technique cross-reference table, quote one specific
    line from the script or screenplay that the row's label word (e.g. "循环", "对照", "呼应")
    actually describes. If a row's key word doesn't have a real textual match, the label is wrong
@@ -295,10 +333,12 @@ a working note you can discard after fixing what it finds):
    mechanism field, not just the carrier image. If two entries share a mechanism, name the two
    and confirm this is a genuinely intentional repeat you're prepared to log as-is, not an
    accident.
-5. **External-check confidence**: re-read your own 外部查重 declaration. If it says
-   置信度中/低, did you actually go verify whether *your own thesis's contrarian angle* — not
-   just the common reading — already exists in criticism you know of? If you wrote the
-   declaration but didn't do that check, do it now or downgrade the confidence label honestly.
+5. **Load-bearing detail check**: re-read your own 关键细节查重 declaration. If the detail is
+   marked already-common, quote the specific sentence where the script's *added value* — the
+   recombination or extension beyond the detail itself — actually appears. A "reversal" built by
+   repackaging one already-famous detail under a new label is not depth; if you can't quote where
+   the script goes beyond the detail, it's a repackaging, not a reversal — go add the extension or
+   pick a different load-bearing detail.
 
 If any of the five produces a "no, I can't point to that" answer, that is a finding — fix the
 draft, then re-answer that one item to confirm the fix actually lands (don't just assume it
