@@ -87,20 +87,40 @@ argue** — ideally an angle that diverges from (or productively complicates) th
 reading of the film. That's what makes a script feel deep — not vocabulary. Once the thesis is
 set, design the act structure backwards from it.
 
-Before locking the thesis in, run two checks so "diverges from the most common reading" is an
+Before locking the thesis in, run three checks so "diverges from the most common reading" is an
 actual verified step, not something left to happen by accident:
 
-- **External check**: name the film's most common existing reading(s) — from your own knowledge,
-  and web search if you're not confident — so the thesis can deliberately diverge from it or
-  confront it head-on, not accidentally restate it in fresh vocabulary. Applies to both Branch A
-  and Branch B; a reference video's specific wording is a separate concern already covered above.
+- **External check (must produce a visible declaration, not a silent mental step)**: name the
+  film's most common existing reading(s). Then write one of these two lines into the assembled
+  document's header (see [`references/output_template.md`](references/output_template.md)) and
+  say it to the user before Step 3 begins:
+
+  `外部查重：已搜索确认——[搜到的关键信息/来源]`, or
+  `外部查重：未搜索，基于训练知识，置信度[高/中/低]——[为什么]`
+
+  "Search if you're not confident" is too easy to rationalize past — the model almost always
+  *feels* confident about training data, so the search never actually triggers. Writing a
+  confidence label down makes the skip visible instead of invisible. A 置信度中/低 declaration
+  isn't itself a failure, but it's a promise: it means you still have to go check whether *your
+  own thesis's contrarian angle* — not just the "common reading" you named — is already common in
+  existing criticism. Applies to both Branch A and Branch B; a reference video's specific wording
+  is a separate concern already covered above.
 - **Internal check**: look up [`references/used_theses_log.md`](references/used_theses_log.md).
   If this film has been covered before, this run's thesis must take a materially different
   angle, not the same angle with new phrasing.
+- **Third-layer check**: your thesis already diverges from the common reading (external check) —
+  now name the single strongest objection *to your own thesis itself*, not a restatement of the
+  common reading's objection. This is [`references/script_format_guide.md`](references/script_format_guide.md)
+  六's "third layer": intuitive reading → your reversal → this reversal complicated further. If
+  you can't state an objection a sharp viewer would actually raise, your reversal is probably too
+  clean to be the deepest available reading. Decide which specific act will engage it (usually the
+  closing act, but any specific act is valid) — the act you name must contain an actual sentence
+  that states the objection and answers it, not just gesture near it.
 
 Once the thesis is locked in, append one line to
-[`references/used_theses_log.md`](references/used_theses_log.md) stating it, so future runs —
-on this film or others — can check against it.
+[`references/used_theses_log.md`](references/used_theses_log.md) stating it **and the
+third-layer objection it had to survive**, so future runs — on this film or others — can check
+against both the angle and the depth achieved.
 
 See [`references/script_format_guide.md`](references/script_format_guide.md) for hook
 patterns, per-act closing-line conventions, and pacing guidance. Reuse the *method*, not any
@@ -159,17 +179,24 @@ inheriting this one by default):
 ### Step 4 — Design the animated short's world
 
 Before designing anything, check
-[`references/used_concepts_log.md`](references/used_concepts_log.md) — it logs the carrier
-images already used by past runs. **This run must use a new one.** Even if the theme is
-similar to a past film, the concrete vehicle for it must be different.
+[`references/used_concepts_log.md`](references/used_concepts_log.md) — it logs both the carrier
+images **and the circulation mechanisms** already used by past runs. **This run must use both a
+new carrier image and, if the theme calls for a circulation structure, a circulation mechanism
+not structurally identical to a past entry's** — a different carrier image alone is not
+sufficient if the underlying machine (periodic ritual + a rotating figure who announces it +
+an unfulfilled promise) is the same as a past entry's; see
+[`references/animation_fable_guide.md`](references/animation_fable_guide.md) 三 for alternate
+mechanisms.
 
 See [`references/animation_fable_guide.md`](references/animation_fable_guide.md) for the
-method: how to find a concrete, visual "carrier image" for an abstract theme, how to design an
+method: how to find a concrete, visual "carrier image" for an abstract theme, how to choose a
+circulation mechanism that isn't a repeat of a past entry's underlying shape, how to design an
 echoing open/close, and how to mix dark wit with a serious theme without trivializing it.
 
 Once designed, append one line to
-[`references/used_concepts_log.md`](references/used_concepts_log.md) describing the carrier
-image used, so future runs can avoid repeating it.
+[`references/used_concepts_log.md`](references/used_concepts_log.md) describing **both** the
+carrier image and the circulation mechanism used (see that file's format), so future runs can
+avoid repeating either.
 
 ### Step 5 — Write the full animated screenplay
 
@@ -209,22 +236,74 @@ line, and fix anything that doesn't hold up:
       generic default.
 - [ ] Every act where narration duration falls meaningfully short of the act's timecode span has
       a timestamped shot list per [`references/script_format_guide.md`](references/script_format_guide.md)
-      （七）— no act is left with a single vague "镜头缓缓扫过" line.
+      （七）— no act is left with a single vague "镜头缓缓扫过" line, **and no single technique
+      dominates as the "延展" gap-filler in more than half the triggering acts (七.4.1)** —
+      literally count which technique is dominant in each triggering act before checking this box.
 - [ ] Copyright check: no film dialogue or source-novel text quoted beyond ~15 characters/words;
       every historical/biographical fact is either one you're confident is accurate or explicitly
       hedged ("据记载...") — nothing was invented for dramatic effect.
+- [ ] The 外部查重 declaration is present in the document header in the exact
+      `已搜索确认.../未搜索...置信度...` format — not skipped, not vague.
 - [ ] The animated short passes the "hasn't seen the source film" test: no reused names, no
       recognizable specific plot beats from the real film.
 - [ ] The animated short has its echo (an opening line/symbol that returns changed at the close)
       and at least one foil/turning-point character — it isn't the protagonist carrying the whole
       thing alone.
-- [ ] The new carrier image was appended to
-      [`references/used_concepts_log.md`](references/used_concepts_log.md), and the thesis angle
-      was appended to [`references/used_theses_log.md`](references/used_theses_log.md).
-- [ ] The technique cross-reference table's rows are substantive and specific to this run, not
-      filler that could apply to any film.
+- [ ] The new carrier image **and circulation mechanism** were appended to
+      [`references/used_concepts_log.md`](references/used_concepts_log.md) in the two-part
+      format, and the thesis angle **and its third-layer objection** were appended to
+      [`references/used_theses_log.md`](references/used_theses_log.md).
+- [ ] The technique cross-reference table's rows are substantive and specific to this run — and
+      each row's **label itself** (not just its content) was checked against what the script
+      actually does, per `output_template.md`（三）; a label inherited from a past example
+      (e.g. "循环结构") was renamed if it doesn't structurally fit this film (e.g. a sustained
+      parallel contrast is "平行对照", not "循环结构").
 
 If any box doesn't hold up, fix the draft before saving — don't note the gap and move on anyway.
+
+### Step 6.5 — Adversarial second pass: try to break the draft, don't just confirm it
+
+The checklist above is an **affirmative** pass — every item asks "does X hold," and a first-pass
+generation that wrote each of those things in good faith will tick every box without real
+scrutiny. This is a known, observed failure mode of this exact workflow: a real test run passed
+every item on that list and still had five substantive problems, found only when the same model
+was made to switch into a genuinely different review mode — actively hunting for the weakest
+point, not confirming compliance. Do not skip this step and do not fold it into the checklist
+above as more boxes; it must be a **separate pass with a different task shape**: instead of
+"does X hold" (yes/no), each item below asks you to **attempt to falsify a specific claim** and
+requires a **quoted or counted answer**, not a checkmark. Do this after Step 6's checklist
+passes, before Step 7.
+
+Answer each of these in writing (a few lines each is enough — this isn't a new deliverable, it's
+a working note you can discard after fixing what it finds):
+
+1. **Thesis counter-argument**: quote the exact sentence (or two) in the script where the
+   third-layer objection (Step 2) is actually stated and answered. If you can't point to a
+   specific sentence, it isn't there — go add it, don't describe it in the abstract.
+2. **Table row labels**: for each row in the technique cross-reference table, quote one specific
+   line from the script or screenplay that the row's label word (e.g. "循环", "对照", "呼应")
+   actually describes. If a row's key word doesn't have a real textual match, the label is wrong
+   — rename it ([`references/output_template.md`](references/output_template.md) 三).
+3. **Shot-technique count**: literally count, across the whole script, how many times each of
+   the 8 techniques in [`references/script_format_guide.md`](references/script_format_guide.md)
+   七.4 is used as the dominant/延展 technique in a triggering act. Write the tally. If one
+   technique's count exceeds half the triggering acts, fix it per 七.4.1 — don't eyeball this,
+   count it.
+4. **Circulation mechanism**: state which mechanism category
+   ([`references/animation_fable_guide.md`](references/animation_fable_guide.md) 三) this run's
+   fable uses, then open `used_concepts_log.md` and check it against every past entry's
+   mechanism field, not just the carrier image. If two entries share a mechanism, name the two
+   and confirm this is a genuinely intentional repeat you're prepared to log as-is, not an
+   accident.
+5. **External-check confidence**: re-read your own 外部查重 declaration. If it says
+   置信度中/低, did you actually go verify whether *your own thesis's contrarian angle* — not
+   just the common reading — already exists in criticism you know of? If you wrote the
+   declaration but didn't do that check, do it now or downgrade the confidence label honestly.
+
+If any of the five produces a "no, I can't point to that" answer, that is a finding — fix the
+draft, then re-answer that one item to confirm the fix actually lands (don't just assume it
+does). This pass is not optional, and skipping it because Step 6's checklist already passed is
+exactly the mistake this section exists to prevent.
 
 ### Step 7 — Save it as a markdown file (don't stop at printing it in chat)
 
